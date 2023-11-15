@@ -40,7 +40,22 @@ for model in models:
 
     # Center the object
     bpy.ops.object.location_clear(clear_delta=False)
+
+    #add the imported objekt as collide
+    bpy.ops.object.modifier_add(type='COLLISION')
+
+    # deselect the imported object
+    bpy.context.view_layer.objects.active = None
     
+    #plane as cloth
+    bpy.ops.mesh.primitive_plane_add(
+                                    enter_editmode=False, 
+                                    align='WORLD', 
+                                    location=(0, 0, 1100), 
+                                    scale=(1100, 1100, 1)
+                                    )
+
+
     # Add a cloth simulation
     bpy.ops.object.modifier_add(type='CLOTH')
     bpy.context.object.modifiers["Cloth"].settings.quality = 5  # Increase quality if needed
