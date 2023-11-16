@@ -1,7 +1,7 @@
 # CVP-Project
 ## switch the branch -> devscartch 
 
-ohneanim.py is the latest file. 
+### go to /datasets/script.py
 
 It implements (some what):
 - Importing-centering-scaling of the object
