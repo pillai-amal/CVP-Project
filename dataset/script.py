@@ -22,15 +22,19 @@ def import_and_setup_model(filepath, decimate_ratio):
     bpy.ops.object.modifier_add(type='COLLISION')
     bpy.context.view_layer.objects.active = None
 
-def setup_cloth_simulation(subdivisions):
+    size_x, size_y, size_z = imported_object.dimensions
+
+    return [size_x, size_y, size_z]
+
+def setup_cloth_simulation(subdivisions,x,y):
     bpy.ops.mesh.primitive_plane_add(
         enter_editmode=False,
         align='WORLD',
         location=(0, 0, 60),
-        scale=(1, 1, 1)
+        scale=(x, y, 1)
     )
     
-    bpy.ops.transform.resize(value=(1, 1, 1))
+    bpy.ops.transform.resize(value=(x, y, 1))
     bpy.ops.object.mode_set(mode='OBJECT')  # Switch back to Object mode
 
     # cloth_object = bpy.context.active_object
@@ -75,8 +79,9 @@ def main():
     models = ["monkey.obj"]
 
     for model in models:
-        import_and_setup_model(model, decimate_ratio=0.5)
-        setup_cloth_simulation(subdivisions=22)
+        #import_and_setup_model(model, decimate_ratio=0.5)
+        x, y, _ = import_and_setup_model(model, decimate_ratio=0.5)
+        setup_cloth_simulation(22,x,y)
 
         cloth_object = bpy.context.active_object
         cloth_export_path = os.path.join(os.getcwd(), f"{model}_cloth.obj")
