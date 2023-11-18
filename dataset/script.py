@@ -35,6 +35,9 @@ def setup_cloth_simulation(subdivisions,x,y):
     )
     
     bpy.ops.transform.resize(value=(x, y, 1))
+    bpy.ops.object.mode_set(mode='EDIT')
+    bpy.ops.mesh.select_all(action='SELECT')
+    bpy.ops.mesh.subdivide(number_cuts=21)
     bpy.ops.object.mode_set(mode='OBJECT')  # Switch back to Object mode
 
     # cloth_object = bpy.context.active_object
@@ -49,7 +52,7 @@ def setup_cloth_simulation(subdivisions,x,y):
 
     # Bake cloth simulation
     bpy.context.scene.frame_start = 1
-    bpy.context.scene.frame_end = 250  # Adjust frame_end as needed
+    bpy.context.scene.frame_end = 400  # Adjust frame_end as needed
     bpy.ops.ptcache.bake_all(bake=True)
 
 def setup_lighting():
