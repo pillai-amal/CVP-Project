@@ -34,7 +34,7 @@ def setup_cloth_simulation(subdivisions,x,y):
         scale=(x, y, 1)
     )
     
-    bpy.ops.transform.resize(value=(x, y, 1))
+    bpy.ops.transform.resize(value=(1.5*x, 1.5*y, 1))
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.ops.mesh.select_all(action='SELECT')
     bpy.ops.mesh.subdivide(number_cuts=21)
@@ -45,7 +45,7 @@ def setup_cloth_simulation(subdivisions,x,y):
     
     #Additional cloth settings which can be turned on if necessary 
 
-    # bpy.context.object.modifiers["Cloth"].settings.quality = 5
+    bpy.context.object.modifiers["Cloth"].settings.quality = 20
     # bpy.context.object.modifiers["Cloth"].settings.use_pressure = True
     # bpy.context.object.modifiers["Cloth"].settings.uniform_pressure_force = 1.0  
     # bpy.ops.object.modifier_apply({"object": cloth_object}, modifier="Cloth")
@@ -58,7 +58,7 @@ def setup_cloth_simulation(subdivisions,x,y):
 def setup_lighting():
     bpy.ops.object.light_add(type='POINT', radius=1, align='WORLD', location=(0, 0, 200))
     light = bpy.context.object
-    light.data.energy = 1000
+    light.data.energy = 2500
 
 def export_mesh(obj, filepath):
     bpy.ops.object.select_all(action='DESELECT')
@@ -84,7 +84,7 @@ def main():
     for model in models:
         #import_and_setup_model(model, decimate_ratio=0.5)
         x, y, _ = import_and_setup_model(model, decimate_ratio=0.5)
-        setup_cloth_simulation(22,x,y)
+        setup_cloth_simulation(100,x,y)
 
         cloth_object = bpy.context.active_object
         cloth_export_path = os.path.join(os.getcwd(), f"{model}_cloth.obj")
