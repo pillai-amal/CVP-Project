@@ -47,7 +47,6 @@ def export_mesh(obj, filepath):
     bpy.ops.object.select_all(action='DESELECT')
     obj.select_set(True)
     bpy.context.view_layer.objects.active = obj
-    #bpy.ops.export_scene.obj(filepath=filepath, use_selection=True)
     bpy.ops.wm.obj_export(filepath=filepath)
 
 
