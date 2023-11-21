@@ -23,7 +23,7 @@ def setup_cloth_simulation():
     bpy.ops.mesh.primitive_plane_add(
         enter_editmode=False,
         align='WORLD',
-        location=(0, 0, 20),
+        location=(0, 0, 12),
         scale=(2, 2, 1)
     )
     bpy.ops.object.mode_set(mode='EDIT')
@@ -33,21 +33,23 @@ def setup_cloth_simulation():
     
     # Additional cloth settings which can be turned on if necessary 
 
-    bpy.context.object.modifiers["Cloth"].settings.quality = 20
+    #bpy.context.object.modifiers["Cloth"].settings.quality = 20
     # bpy.context.object.modifiers["Cloth"].settings.use_pressure = True
     # bpy.context.object.modifiers["Cloth"].settings.uniform_pressure_force = 1.0  
     # bpy.ops.object.modifier_apply({"object": cloth_object}, modifier="Cloth")
 
     # Bake cloth simulation
     bpy.context.scene.frame_start = 1
-    bpy.context.scene.frame_end = 400  # Adjust frame_end as needed
+    bpy.context.scene.frame_end = 200  # Adjust frame_end as needed
     bpy.ops.ptcache.bake_all(bake=True)
 
 def export_mesh(obj, filepath):
     bpy.ops.object.select_all(action='DESELECT')
     obj.select_set(True)
     bpy.context.view_layer.objects.active = obj
-    bpy.ops.export_scene.obj(filepath=filepath, use_selection=True)
+    #bpy.ops.export_scene.obj(filepath=filepath, use_selection=True)
+    bpy.ops.wm.obj_export(filepath=filepath)
+
 
 def main():
     bpy.ops.object.select_all(action='DESELECT')
@@ -55,7 +57,7 @@ def main():
     bpy.ops.object.delete()
 
     context = bpy.context
-    models = ["monkey.obj"]
+    models = ["FinalBaseMesh.obj"]
 
     for model in models:
         import_and_setup_model(model)
