@@ -42,7 +42,6 @@ def setup_cloth_simulation():
     bpy.ops.ptcache.bake_all(bake=True)
 
 def export_cloth_mesh(obj, filepath):
-    #bpy.ops.object.delete(use_global=False)
     bpy.ops.object.select_all(action='DESELECT')
     obj.select_set(True)
     bpy.context.view_layer.objects.active = obj
@@ -63,25 +62,24 @@ def main():
     models = ["FinalBaseMesh.obj"]
 
     for model in models:
+        print("Loading Model:", model)
+
         file_name = os.path.splitext(os.path.basename(model))[0]
         import_and_setup_model(model)
         setup_cloth_simulation()
 
-        #cloth_object = bpy.context.collection.objects[0]
         cloth_object = bpy.data.objects['Plane']
         cloth_export_path = os.path.join(os.getcwd(), f"{file_name}_cloth.obj")
         export_cloth_mesh(cloth_object, cloth_export_path)
 
-        #original_object = bpy.data.objects[model]
-        #bpy.context.collection.objects[2]
-
         original_export_path = os.path.join(os.getcwd(), f"{file_name}_original.obj")
-        #export_mesh(original_object, original_export_path)
-
  
-
     print("Import, Transformation, and Cloth Simulation completed.")
     print(f"Cloth saved at: {cloth_export_path}")
     print(f"Object saved at: {original_export_path}")
-
+    
+    bpy.ops.object.select_all(action='DESELECT')
+    bpy.ops.object.select_by_type(type='MESH')
+    bpy.ops.object.delete()
+    
 main()
