@@ -59,7 +59,7 @@ def main():
     bpy.ops.object.delete()
 
     context = bpy.context
-    models = ["FinalBaseMesh.obj"]
+    models = ["2909.obj", "Basswood_Fan_0.obj"]
 
     for model in models:
         print("Loading Model:", model)
@@ -74,12 +74,12 @@ def main():
 
         original_export_path = os.path.join(os.getcwd(), f"{file_name}_original.obj")
  
-    print("Import, Transformation, and Cloth Simulation completed.")
-    print(f"Cloth saved at: {cloth_export_path}")
-    print(f"Object saved at: {original_export_path}")
+        print("Import, Transformation, and Cloth Simulation completed.")
+        print(f"Cloth saved at: {cloth_export_path}")
+        print(f"Object saved at: {original_export_path}")
     
-    bpy.ops.object.select_all(action='DESELECT')
-    bpy.ops.object.select_by_type(type='MESH')
-    bpy.ops.object.delete()
-    
+        bpy.ops.object.select_all(action='DESELECT')
+        bpy.ops.object.select_by_type(type='MESH')
+        bpy.ops.object.delete()
+    print("All processing Complete")
 main()
