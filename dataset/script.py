@@ -59,7 +59,7 @@ def main():
     bpy.ops.object.delete()
 
     context = bpy.context
-    models = ["2909.obj", "Basswood_Fan_0.obj"]
+    models = ["FinalBaseMesh.obj","Basswood_Fan_0.obj"]
 
     for model in models:
         print("Loading Model:", model)
