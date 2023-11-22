@@ -2,9 +2,9 @@ import bpy
 import os
 import re
 
-def import_and_setup_model(filepath):
-    directory = re.sub(r"\\[^\\]*$", "", filepath)
-    bpy.ops.wm.obj_import(filepath=filepath,directory=directory)
+def import_and_setup_model(model_name):
+    directory = re.sub(r"\\[^\\]*$", "", model_name)
+    bpy.ops.wm.obj_import(filepath=model_name,directory=directory)
     
     obj_name = bpy.context.object.name
     max_dim = max(bpy.data.objects.get(obj_name).dimensions)
@@ -18,13 +18,15 @@ def import_and_setup_model(filepath):
     bpy.ops.object.location_clear(clear_delta=False)
     bpy.ops.object.modifier_add(type='COLLISION')
     bpy.context.view_layer.objects.active = None
+    filepath = os.path.join(os.getcwd(), f"{model_name}_original.obj")
+    bpy.ops.wm.obj_export(filepath=filepath)
 
 def setup_cloth_simulation():
     bpy.ops.mesh.primitive_plane_add(
         enter_editmode=False,
         align='WORLD',
         location=(0, 0, 2),
-        scale=(2, 2, 1)
+        scale=(1, 1, 1)
     )
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.ops.mesh.subdivide(number_cuts=100)
@@ -38,16 +40,22 @@ def setup_cloth_simulation():
     bpy.context.scene.frame_end = 100  # Adjust frame_end as needed
     bpy.ops.ptcache.bake_all(bake=True)
 
-def export_mesh(obj, filepath):
+def export_cloth_mesh(obj, filepath):
+    #bpy.ops.object.delete(use_global=False)
     bpy.ops.object.select_all(action='DESELECT')
     obj.select_set(True)
     bpy.context.view_layer.objects.active = obj
+    bpy.ops.object.select_all(action='INVERT')
+    bpy.ops.object.delete()
+    bpy.context.view_layer.objects.active = obj
+    bpy.context.scene.frame_set(bpy.context.scene.frame_end)
     bpy.ops.wm.obj_export(filepath=filepath)
 
 
 def main():
-    bpy.ops.object.select_all(action='DESELECT')
-    bpy.ops.object.select_by_type(type='MESH')
+    bpy.context.view_layer.objects.active = bpy.data.objects['Light']
+    bpy.ops.object.delete()
+    bpy.context.view_layer.objects.active = bpy.data.objects['Camera']
     bpy.ops.object.delete()
 
     context = bpy.context
@@ -60,15 +68,15 @@ def main():
         #cloth_object = bpy.context.collection.objects[0]
         cloth_object = bpy.data.objects['Plane']
         cloth_export_path = os.path.join(os.getcwd(), f"{model}_cloth.obj")
-        export_mesh(cloth_object, cloth_export_path)
+        export_cloth_mesh(cloth_object, cloth_export_path)
 
-        #original_object = bpy.context.collection.objects[1]
-        original_object = bpy.data.objects[model]
+        #original_object = bpy.data.objects[model]
+        #bpy.context.collection.objects[2]
 
         original_export_path = os.path.join(os.getcwd(), f"{model}_original.obj")
-        export_mesh(original_object, original_export_path)
+        #export_mesh(original_object, original_export_path)
 
-    bpy.ops.render.render(write_still=True)
+ 
 
     print("Import, Transformation, and Cloth Simulation completed.")
     print(f"Cloth saved at: {cloth_export_path}")
