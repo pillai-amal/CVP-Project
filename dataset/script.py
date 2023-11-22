@@ -18,7 +18,8 @@ def import_and_setup_model(model_name):
     bpy.ops.object.location_clear(clear_delta=False)
     bpy.ops.object.modifier_add(type='COLLISION')
     bpy.context.view_layer.objects.active = None
-    filepath = os.path.join(os.getcwd(), f"{model_name}_original.obj")
+    file_name = os.path.splitext(os.path.basename(model_name))[0]
+    filepath = os.path.join(os.getcwd(), f"{file_name}_original.obj")
     bpy.ops.wm.obj_export(filepath=filepath)
 
 def setup_cloth_simulation():
@@ -62,18 +63,19 @@ def main():
     models = ["FinalBaseMesh.obj"]
 
     for model in models:
+        file_name = os.path.splitext(os.path.basename(model))[0]
         import_and_setup_model(model)
         setup_cloth_simulation()
 
         #cloth_object = bpy.context.collection.objects[0]
         cloth_object = bpy.data.objects['Plane']
-        cloth_export_path = os.path.join(os.getcwd(), f"{model}_cloth.obj")
+        cloth_export_path = os.path.join(os.getcwd(), f"{file_name}_cloth.obj")
         export_cloth_mesh(cloth_object, cloth_export_path)
 
         #original_object = bpy.data.objects[model]
         #bpy.context.collection.objects[2]
 
-        original_export_path = os.path.join(os.getcwd(), f"{model}_original.obj")
+        original_export_path = os.path.join(os.getcwd(), f"{file_name}_original.obj")
         #export_mesh(original_object, original_export_path)
 
  
