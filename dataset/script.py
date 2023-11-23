@@ -34,11 +34,10 @@ def setup_cloth_simulation():
     bpy.ops.object.mode_set(mode='OBJECT') 
     bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
     bpy.ops.object.modifier_add(type='CLOTH')
-
-
+    bpy.context.object.modifiers["Cloth"].point_cache.frame_end = 50
     # Bake cloth simulation
     bpy.context.scene.frame_start = 1
-    bpy.context.scene.frame_end = 100  # Adjust frame_end as needed
+    bpy.context.scene.frame_end = 50  # Adjust frame_end as needed
     bpy.ops.ptcache.bake_all(bake=True)
 
 def export_cloth_mesh(obj, filepath):
@@ -59,7 +58,7 @@ def main():
     bpy.ops.object.delete()
 
     context = bpy.context
-    models = ["FinalBaseMesh.obj","Basswood_Fan_0.obj"]
+    models = ["FinalBaseMesh.obj","Cap.obj", "microwave.obj", "The_Infinite_Beer_Mug_From_The_Futur-(Wavefront OBJ).obj"]
 
     for model in models:
         print("Loading Model:", model)
