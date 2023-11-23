@@ -58,7 +58,49 @@ def main():
     bpy.ops.object.delete()
 
     context = bpy.context
-    models = ["FinalBaseMesh.obj","Cap.obj", "microwave.obj", "The_Infinite_Beer_Mug_From_The_Futur-(Wavefront OBJ).obj"]
+    models = [
+    'Cruiser2012.obj',
+    '2012.obj',
+    'FinalBaseMesh.obj',
+    'Heli_bell.obj',
+    'Jade_buddha.obj',
+    'LaptopModel.obj',
+    'Mars2.obj',
+    'OgreOBJ.obj',
+    'ResidentialBuildings001.obj',
+    '001.obj',
+    'Rmk3.obj',
+    'Robo8.obj',
+    'Robot.obj',
+    'Seahawk.obj',
+    'Shorts.obj',
+    'Skycrane.obj',
+    'The_Infinite_Beer_Mug_From_The_Futur-(Wavefront OBJ).obj',
+    'Tire.obj',
+    'airplaneengine.obj',
+    'balto.obj',
+    'bulb.obj',
+    'couch.obj',
+    'craft.obj',
+    'cybertruck (final).obj',
+    'desk.obj',
+    'drone.obj',
+    'eb_lamp_01.obj',
+    'eb_nightstand_01.obj',
+    'eb_sconce_light_01.obj',
+    'essex_scb-125_generic.obj',
+    'jetanima.obj',
+    'justigue league flying vehicle.obj',
+    'vehicle.obj',
+    'mic.obj',
+    'microwave.obj',
+    'modernchair.obj',
+    'potted_plant_obj.obj',
+    'satellite_obj.obj',
+    'table.obj',
+    'truck.obj',
+    'uploads_files_2787791_Mercedes+Benz+GLS+580.obj',
+    'wanna1.obj']
 
     for model in models:
         print("Loading Model:", model)
