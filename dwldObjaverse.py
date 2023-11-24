@@ -5,19 +5,10 @@ from dataclasses import dataclass
 
 import boto3
 import objaverse
-<<<<<<< HEAD
 import objaverse.xl as oxl
 import multiprocessing
 import pandas as pd
-=======
-import tyro
-from tqdm import tqdm
->>>>>>> onFedora
-
-
-<<<<<<< HEAD
 oxl.download_objects(dataset_df, download_directory, multiprocessing.cpu_count())
-=======
 @dataclass
 class Args:
     start_i: int
@@ -63,7 +54,6 @@ if __name__ == "__main__":
     if args.skip_completed:
         completed_uids = get_completed_uids()
         uids = [uid for uid in uids if uid not in completed_uids]
-
     uid_object_paths = [
         f"https://huggingface.co/datasets/allenai/objaverse/resolve/main/{object_paths[uid]}"
         for uid in uids
@@ -71,4 +61,4 @@ if __name__ == "__main__":
 
     with open("input_models_path.json", "w") as f:
         json.dump(uid_object_paths, f, indent=2)
->>>>>>> onFedora
+oxl.download_objects(dataset_df, download_directory, multiprocessing.cpu_count())
