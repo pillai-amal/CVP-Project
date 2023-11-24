@@ -22,7 +22,7 @@ for ((i=0; i<num_files; i++)); do
     new_name="$i"
     
     # Rename the file
-    mv "$original_name" "$new_name"
+    mv "$original_name" "$new_name.obj"
     
     echo "Renamed: $original_name -> $new_name"
 done
