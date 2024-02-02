@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 from model import UNetPixelwiseRegression
 from dataset import CustomDataset
+from train import train_model
 
 if __name__ == "__main__":
     
@@ -23,8 +24,10 @@ if __name__ == "__main__":
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 
     # Instantiate the U-Net model
-    model = UNetPixelwiseRegression(in_channels, out_channels)
-
-    # Define loss function and optimizer
+    num_epochs = 5
     criterion = nn.MSELoss()
+    model = UNetPixelwiseRegression(in_channels, out_channels)
     optimizer = optim.Adam(model.parameters(), lr=0.001)
+    train_model(model, dataloader, criterion, optimizer, num_epochs)
+    
+    
