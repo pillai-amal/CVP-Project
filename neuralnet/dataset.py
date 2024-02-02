@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import torch
 from torch.utils.data import Dataset
 
 class CustomDataset(Dataset):
@@ -12,6 +13,6 @@ class CustomDataset(Dataset):
 
     def __getitem__(self, index):
         file_path = os.path.join(self.data_folder, self.file_list[index])
-        input_data = np.load(file_path)
-        target_data = np.load(file_path.replace("input", "target"))  # Assuming corresponding target files have "target" in their names
+        input_data = torch.from_numpy(np.load(file_path)).float()  # Ensure the input is of type float
+        target_data = torch.from_numpy(np.load(file_path.replace("input", "target"))).float()
         return input_data, target_data
