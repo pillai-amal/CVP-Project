@@ -1,10 +1,6 @@
 import torch
-import torch.nn as nn
-import torch.optim as optim
-from torch.utils.data import DataLoader
 from tqdm import tqdm
-from model import UNetPixelwiseRegression
-from dataset import CustomDataset
+import torch.nn.functional as F
 
 def train_model(model, dataloader, criterion, optimizer, num_epochs):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -20,6 +16,7 @@ def train_model(model, dataloader, criterion, optimizer, num_epochs):
 
                 optimizer.zero_grad()
                 outputs = model(inputs)
+                print(inputs.size(), outputs.size())
                 loss = criterion(outputs, targets)
                 loss.backward()
                 optimizer.step()
