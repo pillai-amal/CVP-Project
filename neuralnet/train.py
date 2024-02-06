@@ -17,8 +17,9 @@ def train_model(model, dataloader, criterion, optimizer, num_epochs):
                 
                 optimizer.zero_grad()
                 outputs = model(inputs)
-                
-                loss = criterion(outputs, targets)
+                target_resized = F.interpolate(targets, size=outputs.size()[2:], mode='nearest')
+
+                loss = criterion(outputs, target_resized)
                 loss.backward()
                 optimizer.step()
 

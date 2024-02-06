@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 class UNetPixelwiseRegression(nn.Module):
-    def __init__(self, in_channels = 1, out_channels = 1):
+    def __init__(self, in_channels=1, out_channels=1):
         super(UNetPixelwiseRegression, self).__init__()
 
         # Contracting path
@@ -23,7 +23,6 @@ class UNetPixelwiseRegression(nn.Module):
         # Output layer with linear activation for regression
         self.out_conv = nn.Conv2d(128, out_channels, kernel_size=3, padding=1)
 
-
     def conv_block(self, in_channels, out_channels):
         return nn.Sequential(
             nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1),
@@ -36,7 +35,9 @@ class UNetPixelwiseRegression(nn.Module):
     def upconv_block(self, in_channels, out_channels):
         return nn.Sequential(
             nn.ConvTranspose2d(in_channels, out_channels, kernel_size=2, stride=2),
-            nn.ReLU(inplace=True),)
+            nn.ReLU(inplace=True),
+        )
+
     def forward(self, x):
         # Contracting path
         enc1 = self.encoder1(x)
@@ -50,14 +51,13 @@ class UNetPixelwiseRegression(nn.Module):
         # Expanding path
         dec4 = self.decoder4(bottleneck)
         concat4 = torch.cat([dec4, enc4], dim=1)
-        
-        # Corrected decoder block
+
         dec3 = self.decoder3(concat4)
         concat3 = torch.cat([dec3, enc3], dim=1)
-        
+
         dec2 = self.decoder2(concat3)
         concat2 = torch.cat([dec2, enc2], dim=1)
-        
+
         dec1 = self.decoder1(concat2)
         concat1 = torch.cat([dec1, enc1], dim=1)
 

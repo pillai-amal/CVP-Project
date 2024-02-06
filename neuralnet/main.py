@@ -9,7 +9,7 @@ if __name__ == "__main__":
     
     data_folder = "./input"
 
-    batch_size = 4
+    batch_size = 20
     patch_size = 33 #hab ich willkurlich jeden Bilden 33x33 Segmentiert  
 
     # Create DataLoader for batching
