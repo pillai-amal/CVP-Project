@@ -13,10 +13,11 @@ def train_model(model, dataloader, criterion, optimizer, num_epochs):
         with tqdm(total=len(dataloader), desc=f'Epoch {epoch+1}/{num_epochs}', unit='batch') as pbar:
             for inputs, targets in dataloader:
                 inputs, targets = inputs.to(device), targets.to(device)
-
+                print(inputs.size(), targets.size())
+                
                 optimizer.zero_grad()
                 outputs = model(inputs)
-                print(inputs.size(), outputs.size())
+                
                 loss = criterion(outputs, targets)
                 loss.backward()
                 optimizer.step()

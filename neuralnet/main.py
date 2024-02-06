@@ -9,7 +9,7 @@ if __name__ == "__main__":
     
     data_folder = "./input"
 
-    batch_size = 20
+    batch_size = 4
     patch_size = 33 #hab ich willkurlich jeden Bilden 33x33 Segmentiert  
 
     # Create DataLoader for batching
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # Instantiate the U-Net model
     num_epochs = 5
     criterion = nn.MSELoss()
-    model = UNetPixelwiseRegression(1,1)
+    model = UNetPixelwiseRegression()
     optimizer = optim.Adam(model.parameters(), lr=0.001)
     train_model(model, dataloader, criterion, optimizer, num_epochs)
     
