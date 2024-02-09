@@ -4,3 +4,4 @@
 *.npy
 /neuralnet/target/*
 /neuralnet/target/*
+*.tar
