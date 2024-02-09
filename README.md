@@ -6,6 +6,4 @@
 - The cloth after simulation are vertex colored and part of touching the object and not toching the object with increasing intensity of whiteness. 
 - The cloth without the vertex color is used for traning a 'U net' to regress the pixel distance. 
 
-please check the readme.pdf or contact us for more details thanks. 
-
-:w
+please check the readme.pdf or contact us for the trained weights or just talk about it :) 
