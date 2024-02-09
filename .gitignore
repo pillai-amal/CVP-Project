@@ -4,4 +4,3 @@
 *.npy
 /neuralnet/target/*
 /neuralnet/target/*
-/neuralnet/weights/*
