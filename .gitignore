@@ -2,5 +2,5 @@
 *.obj
 *.mtl
 *.npy
-./neuralnet/target/*.png
-./neuralnet/input/*.png
+.*/neuralnet/target/*.png
+.*/neuralnet/input/*.png
