@@ -1,24 +1,11 @@
-# All Completed - Repo will be upated soon with all details.  
+### this is done as part of the course Computational Visual Perception at FAU Erlangen
+----
+- The study on was done on how human perception works on draped objects. 
+- 3D Objects were downloaded and Blender was used to make make cloth simulation in drapping the objects. 
+- After the simulation, the the cloth and objects are exported as 512x512 grayscale images. 
+- The cloth after simulation are vertex colored and part of touching the object and not toching the object with increasing intensity of whiteness. 
+- The cloth without the vertex color is used for traning a 'U net' to regress the pixel distance. 
 
-# CVP-Project - Part 1
+please check the readme.pdf or contact us for more details thanks. 
 
-COMPLETED
-- Importing-centering-scaling of the object
-- Cloth sim
-- Save both the object and simulated cloth meshes as obj file
-
-- Get the Dataset 
-
-TO DO:
-- ~~Make the script for all object~~
-
-Issues:
-- ~~[Minor] Change the naming convections~~
-- [Major] The cloth appears to be unsatable
-
-
-HOW TO:
-- Run $./download_obj.sh links.csv , to download the obj files in the csv file
-- add the names on the script ad $blender --background --python script.py
-  
-# CVP-Project - Part 2
+:w
